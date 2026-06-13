@@ -48,7 +48,8 @@
     border-radius: 16px; padding: 24px 20px;
     width: min(400px, calc(100vw - 28px));
     box-shadow: 0 0 60px rgba(0,0,0,.8);
-    animation: cardIn .22s ease; my-4: 16px;
+    animation: cardIn .22s ease;
+    margin: 16px 0;
   }
   @keyframes cardIn {
     from { transform: scale(.9) translateY(14px); opacity:0; }
@@ -124,6 +125,48 @@
   }
   .btn-ghost:hover { border-color:var(--muted); color:var(--text); }
 
+  .btn-redeem {
+    width:220px; padding:11px 0;
+    background:transparent; border:1px solid var(--blue); border-radius:10px;
+    color:var(--blue); font-family:var(--font-d); font-size:13px;
+    font-weight:600; letter-spacing:3px; text-transform:uppercase; cursor:pointer;
+    transition:background .2s,color .2s;
+  }
+  .btn-redeem:hover { background:rgba(59,130,246,.1); }
+
+  .redeem-input {
+    width:100%; background:var(--bg3); border:1px solid var(--border);
+    border-radius:8px; padding:12px 14px; color:#fff;
+    font-family:var(--font-m); font-size:14px; letter-spacing:2px;
+    text-transform:uppercase; text-align:center; margin-bottom:12px;
+    outline:none; transition:border-color .2s;
+  }
+  .redeem-input:focus { border-color:var(--blue); }
+  .btn-redeem-submit {
+    width:100%; padding:12px 0; background:var(--blue); border:none;
+    border-radius:8px; color:#fff; font-family:var(--font-d); font-size:14px;
+    font-weight:700; letter-spacing:3px; text-transform:uppercase; cursor:pointer;
+    transition:transform .1s, opacity .2s;
+  }
+  .btn-redeem-submit:active { transform:scale(.97); }
+  .redeem-msg {
+    font-family:var(--font-m); font-size:11px; text-align:center;
+    margin-top:10px; min-height:16px; letter-spacing:1px;
+  }
+  .redeem-msg.success { color:var(--teal); }
+  .redeem-msg.error { color:var(--red); }
+
+  .tester-row { display:flex; flex-direction:column; gap:6px; margin-top:14px; }
+  .tester-label {
+    font-family:var(--font-m); font-size:9px; color:var(--muted);
+    letter-spacing:2px; text-transform:uppercase; text-align:center; margin-bottom:2px;
+  }
+  .tester-name {
+    background:var(--bg3); border:1px solid var(--border); border-radius:8px;
+    padding:7px 14px; font-size:13px; font-weight:600; color:var(--text);
+    text-align:center; letter-spacing:1px;
+  }
+
   /* ── DEVICE / MODE ── */
   .choice-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
   .choice-card {
@@ -174,10 +217,7 @@
   .btn-link:hover { color:var(--text); }
 
   /* ══ SHOP MODAL ══ */
-  .shop-header {
-    display:flex; align-items:center; justify-content:space-between;
-    margin-bottom:6px;
-  }
+  .shop-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
   .volt-balance {
     display:flex; align-items:center; gap:6px;
     background:var(--bg3); border:1px solid rgba(245,180,0,.3);
@@ -223,18 +263,14 @@
   .perk-cd-text { font-family:var(--font-m); font-size:9px; color:var(--muted); letter-spacing:1px; }
 
   /* ── INNER EYE ghost zone ── */
-  #ghost-zone {
-    transition: opacity .3s;
-  }
+  #ghost-zone { transition: opacity .3s; }
 
   /* ══ GAME WRAP ══ */
   #game-wrap {
     display:flex; flex-direction:column;
     height:100%; max-width:480px; margin:0 auto; padding:14px 14px 0;
   }
-  .topbar {
-    display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;
-  }
+  .topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
   .btn-back {
     background:var(--bg2); border:1px solid var(--border); border-radius:8px;
     padding:5px 12px; font-family:var(--font-m); font-size:11px;
@@ -257,9 +293,7 @@
   @keyframes pulse-badge { 0%,100%{opacity:1} 50%{opacity:.6} }
 
   /* ── PERK STATUS ROW ── */
-  .perk-status-row {
-    display:flex; gap:6px; margin-bottom:8px; flex-wrap:wrap;
-  }
+  .perk-status-row { display:flex; gap:6px; margin-bottom:8px; flex-wrap:wrap; }
   .perk-pill {
     display:flex; align-items:center; gap:4px;
     background:var(--bg2); border:1px solid var(--border);
@@ -371,7 +405,7 @@
   <div class="menu-inner">
     <div class="dev-bubble-wrap">
       <div class="dev-bubble">
-        <p class="dev-bubble-text">Cahyon 😹</p>
+        <p class="dev-bubble-text">Update cuy, sekarang udah ada fitur redeem. Versi Beta 1.1.5</p>
         <div class="dev-bubble-tail"></div>
       </div>
       <div class="dev-avatar-row">
@@ -391,6 +425,7 @@
       <button class="btn-main" onclick="openDeviceModal()">▶ PLAY GAME</button>
       <button class="btn-main shop" onclick="showModal('shop-modal')">⚡ TOKO PERKS</button>
       <button class="btn-ghost" onclick="showModal('credit-modal')">CREDITS</button>
+      <button class="btn-redeem" onclick="openRedeemModal()">🎁 REDEEM CODE</button>
     </div>
   </div>
 </div>
@@ -450,6 +485,20 @@
   </div>
 </div>
 
+<!-- ══ REDEEM MODAL ══ -->
+<div id="redeem-modal" class="overlay hidden">
+  <div class="card">
+    <div class="modal-title" style="color:var(--blue);">🎁 Redeem Code</div>
+    <div class="modal-sub">Masukkan kode untuk klaim Volt</div>
+    <input type="text" id="redeem-input" class="redeem-input" placeholder="MASUKKAN KODE" maxlength="30">
+    <button class="btn-redeem-submit" onclick="submitRedeem()">Klaim Sekarang</button>
+    <div id="redeem-msg" class="redeem-msg"></div>
+    <div style="text-align:center;margin-top:14px;">
+      <button class="btn-link" onclick="hideModal('redeem-modal')">[ Tutup ]</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ CREDIT MODAL ══ -->
 <div id="credit-modal" class="overlay hidden">
   <div class="card">
@@ -457,6 +506,11 @@
       <div class="credit-icon">🛠️</div>
       <div class="modal-title" style="color:var(--muted);font-size:14px;">Developer Credit</div>
       <div class="credit-name">Made By RenXD</div>
+      <div class="tester-row">
+        <div class="tester-label">Tester</div>
+        <div class="tester-name">Cahyon</div>
+        <div class="tester-name">Forza Fight</div>
+      </div>
       <br>
       <button class="btn-link" onclick="hideModal('credit-modal')">[ Close ]</button>
     </div>
@@ -473,7 +527,6 @@
     </div>
   </div>
 
-  <!-- Perk Status Pills -->
   <div class="perk-status-row" id="perk-pills"></div>
 
   <div class="stat-row">
@@ -502,15 +555,12 @@
     <div id="ring-outer" class="ring-outer idle">
       <svg viewBox="0 0 210 210">
         <circle cx="105" cy="105" r="88" fill="none" stroke="#1e1e36" stroke-width="16"/>
-        <!-- ghost zone (Inner Eye) -->
         <circle id="ghost-zone" cx="105" cy="105" r="88" fill="none"
           stroke="#3b82f6" stroke-width="16" stroke-dasharray="0 553"
           transform="rotate(-90 105 105)" opacity="0"/>
-        <!-- good zone -->
         <circle id="good-zone" cx="105" cy="105" r="88" fill="none"
           stroke="#4a4a6a" stroke-width="16" stroke-dasharray="553" stroke-dashoffset="553"
           transform="rotate(-90 105 105)"/>
-        <!-- great zone -->
         <circle id="great-zone" cx="105" cy="105" r="88" fill="none"
           stroke="#00c98a" stroke-width="16" stroke-dasharray="553" stroke-dashoffset="553"
           transform="rotate(-90 105 105)"/>
@@ -543,7 +593,8 @@ const $ = id => document.getElementById(id);
 // ── DOM ──
 const menuOverlay = $('menu-overlay'), deviceModal = $('device-modal'),
       modeModal   = $('mode-modal'),   shopModal   = $('shop-modal'),
-      creditModal = $('credit-modal'), modeBadge   = $('mode-badge'),
+      redeemModal = $('redeem-modal'), creditModal = $('credit-modal'),
+      modeBadge   = $('mode-badge'),
       progFill    = $('prog-fill'),    progText    = $('prog-text'),
       ringOuter   = $('ring-outer'),   needleAxis  = $('needle-axis'),
       goodZone    = $('good-zone'),    greatZone   = $('great-zone'),
@@ -558,8 +609,39 @@ const menuOverlay = $('menu-overlay'), deviceModal = $('device-modal'),
 // ── CONFIG ──
 let device = 'computer', gameMode = 'normal';
 
-// ── ECONOMY ──
-let volts = 100000;
+// ══════════════════ PERSISTENCE (Save/Load) ══════════════════
+const SAVE_KEY = 'genecheck_save_v1';
+
+// ── REDEEM CODES: tambah/edit kode di sini ──
+// Format: 'KODE': jumlahVolt
+const REDEEM_CODES = {
+  'UPDATEGENECHECK!': 15,
+  'GENECHECK10': 10,
+  'YAHOO': 1,
+};
+
+function loadSave() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch(e) { return null; }
+}
+
+function saveGame() {
+  try {
+    const data = {
+      volts: volts,
+      perks: PERKS.map(p => ({ id: p.id, owned: p.owned, cdLeft: p.cdLeft })),
+      redeemed: redeemedCodes
+    };
+    localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+  } catch(e) {}
+}
+
+// ── ECONOMY (persisted) ──
+let volts = 500; // default starting volt for new players
+let redeemedCodes = [];
 
 // ── PERKS DEFINITION ──
 const PERKS = [
@@ -569,7 +651,7 @@ const PERKS = [
     sub: 'Mata Batin',
     desc: 'Menampilkan bayangan biru posisi target zona 1 detik sebelum jarum bergerak. Cooldown: aktif tiap 4× skillcheck.',
     price: 4500,
-    cdMax: 4, // mati selama 4 check, nyala lagi di ke-5 (alias setiap 4 check)
+    cdMax: 4,
     owned: false, cdLeft: 0, useCount: 0
   },
   {
@@ -601,6 +683,24 @@ const PERKS = [
   }
 ];
 
+// ── APPLY SAVE DATA ──
+(function applySave() {
+  const saved = loadSave();
+  if (saved) {
+    if (typeof saved.volts === 'number') volts = saved.volts;
+    if (Array.isArray(saved.perks)) {
+      saved.perks.forEach(sp => {
+        const p = PERKS.find(x => x.id === sp.id);
+        if (p) { p.owned = !!sp.owned; p.cdLeft = sp.cdLeft || 0; }
+      });
+    }
+    if (Array.isArray(saved.redeemed)) redeemedCodes = saved.redeemed;
+  } else {
+    // first time ever — save initial state immediately
+    saveGame();
+  }
+})();
+
 function perk(id) { return PERKS.find(p => p.id === id); }
 function perkOwned(id) { return perk(id).owned; }
 function perkReady(id) { const p = perk(id); return p.owned && p.cdLeft === 0; }
@@ -612,7 +712,7 @@ let repairTick = null, needleTick = null, scTimeout = null, statusTimer = null, 
 let needleAngle = 0, zoneStart = 0;
 let BASE_GOOD_W = 68;
 let spamming = false, spamCount = 0, lastZoneStart = -1;
-let totalSCCount = 0; // untuk cooldown tracking
+let totalSCCount = 0;
 let hyperfocusActive = false;
 let stats = { streak:0, great:0, fail:0 };
 
@@ -654,6 +754,46 @@ function hideModal(id) { $(id).classList.add('hidden'); }
 function openDeviceModal() { hideModal('menu-overlay'); showModal('device-modal'); }
 function selectDevice(d) { device = d; hideModal('device-modal'); showModal('mode-modal'); }
 
+function openRedeemModal() {
+  $('redeem-input').value = '';
+  $('redeem-msg').innerText = '';
+  $('redeem-msg').className = 'redeem-msg';
+  showModal('redeem-modal');
+}
+
+function submitRedeem() {
+  const input = $('redeem-input');
+  const msg = $('redeem-msg');
+  const code = input.value.trim().toUpperCase();
+
+  if (!code) {
+    msg.textContent = 'Masukkan kode terlebih dahulu.';
+    msg.className = 'redeem-msg error';
+    return;
+  }
+
+  if (redeemedCodes.includes(code)) {
+    msg.textContent = 'Kode ini sudah pernah kamu gunakan!';
+    msg.className = 'redeem-msg error';
+    return;
+  }
+
+  if (!(code in REDEEM_CODES)) {
+    msg.textContent = 'Kode tidak valid atau sudah tidak berlaku.';
+    msg.className = 'redeem-msg error';
+    return;
+  }
+
+  const reward = REDEEM_CODES[code];
+  earnVolts(reward);
+  redeemedCodes.push(code);
+  saveGame();
+
+  msg.textContent = `Berhasil! +${reward}⚡ Volt telah ditambahkan.`;
+  msg.className = 'redeem-msg success';
+  input.value = '';
+}
+
 function startGame(mode) {
   gameMode = mode;
   hideModal('mode-modal');
@@ -673,10 +813,12 @@ function startGame(mode) {
     modeBadge.className = 'mode-badge normal';
     modeBadge.innerText = 'NORMAL';
   }
+  updateVoltUI();
+  renderPerkPills();
   resetGame();
 }
 
-function backToMenu() { fullStop(); showModal('menu-overlay'); }
+function backToMenu() { fullStop(); saveGame(); showModal('menu-overlay'); }
 
 // ── SHOP ──
 function renderShop() {
@@ -723,6 +865,7 @@ function buyPerk(id) {
   updateVoltUI();
   renderShop();
   renderPerkPills();
+  saveGame();
 }
 
 function updateVoltUI() {
@@ -733,6 +876,7 @@ function updateVoltUI() {
 function earnVolts(amount) {
   volts += amount;
   updateVoltUI();
+  saveGame();
 }
 
 // ── PERK PILLS (in-game) ──
@@ -748,18 +892,15 @@ function renderPerkPills() {
   });
 }
 
-// ── COOLDOWN TICK (called after each skillcheck resolved) ──
+// ── COOLDOWN TICK ──
 function tickPerkCooldowns() {
   totalSCCount++;
   PERKS.forEach(p => {
     if (!p.owned || p.cdMax === 0) return;
-    if (p.cdLeft > 0) {
-      p.cdLeft--;
-    }
-    // inner-eye: aktif setiap 4 check (mati 3 check, nyala check ke-4 dst)
-    // technician/hyperfocus: cdLeft reset saat dipakai
+    if (p.cdLeft > 0) p.cdLeft--;
   });
   renderPerkPills();
+  saveGame();
 }
 
 // ── REPAIR ──
@@ -808,10 +949,8 @@ function launchSC() {
   if (!isRepairing) return;
   scPending = true; scActive = false;
 
-  // ── Inner Eye: show ghost zone BEFORE needle ──
   if (perkReady('inner-eye')) {
     showGhostZone();
-    // ghost visible for 1 second, then needle starts
     ting();
     drawZones();
     ringOuter.className = 'ring-outer ' + (spamming ? 'active-op' : 'active');
@@ -821,7 +960,6 @@ function launchSC() {
       scPending = false; scActive = true;
       spinNeedle();
     }, 1000);
-    // cooldown inner eye
     perk('inner-eye').cdLeft = perk('inner-eye').cdMax;
   } else {
     ting();
@@ -837,9 +975,6 @@ function launchSC() {
 
 function showGhostZone() {
   const C = 2 * Math.PI * 88;
-  // We predict zoneStart for ghost (same as what drawZones will produce)
-  // We need to compute it first then sync with drawZones
-  // So compute zone first:
   computeZoneStart();
   const goodW = getGoodW();
   const ghostStroke = (goodW / 360) * C;
@@ -868,7 +1003,6 @@ function computeZoneStart() {
 }
 
 function getGoodW() {
-  // Steady Hand: +30% wider good zone
   return perkOwned('steady-hand') ? Math.round(BASE_GOOD_W * 1.30) : BASE_GOOD_W;
 }
 
@@ -877,8 +1011,6 @@ function drawZones() {
   const GREAT_W = 13;
   const goodW   = getGoodW();
 
-  // If inner eye already computed zoneStart, don't recompute
-  // But if not inner-eye path, compute now
   if (!perkReady('inner-eye')) computeZoneStart();
 
   needleAxis.style.transform = 'rotate(0deg)';
@@ -925,7 +1057,6 @@ function triggerHit() {
       stats.great++; stats.streak++;
       progress = Math.min(100, progress + 3);
       earnVolts(15);
-      // Hyperfocus trigger
       if (perkReady('hyperfocus')) {
         activateHyperfocus();
         perk('hyperfocus').cdLeft = perk('hyperfocus').cdMax;
@@ -961,7 +1092,7 @@ function afterHit() {
     progress = Math.min(100, progress + 10);
     updateProgress();
     earnVolts(150);
-    feedMsg('⚡ Panic Cleared! +10%', '#f5b400', 'scale(1.05)');
+    feedMsg('⚡ Panic Cleared! +150⚡', '#f5b400', 'scale(1.05)');
   }
 }
 
@@ -972,10 +1103,9 @@ function failSC(reason) {
   stats.fail++; stats.streak = 0;
   spamming = false; spamCount = 0;
 
-  // Technician's Touch: halve penalty
   let penalty = 8;
   if (perkReady('technician')) {
-    penalty = Math.random() < 0.15 ? 0 : 4; // 15% chance 0 penalty
+    penalty = Math.random() < 0.15 ? 0 : 4;
     perk('technician').cdLeft = perk('technician').cdMax;
   }
 
@@ -1064,16 +1194,20 @@ window.addEventListener('keydown', e => {
   if (!deviceModal.classList.contains('hidden')) return;
   if (!modeModal.classList.contains('hidden')) return;
   if (!shopModal.classList.contains('hidden')) return;
+  if (!redeemModal.classList.contains('hidden')) return;
   if (e.key.toLowerCase() === 'r') { e.preventDefault(); toggleRepair(); }
   if (e.code === 'Space' || e.key === ' ') { e.preventDefault(); triggerHit(); }
 });
 
-// ── AVATAR: set src langsung di sini ──
-// Ganti URL di bawah dengan URL foto kamu
-const DEV_PHOTO_URL = ''; // ← paste URL foto kamu di sini
-if (DEV_PHOTO_URL) {
-  $('dev-photo').src = DEV_PHOTO_URL;
-}
+// ── INIT UI ON LOAD ──
+updateVoltUI();
+
+// ── SAVE ON EXIT ──
+window.addEventListener('beforeunload', saveGame);
+window.addEventListener('pagehide', saveGame);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') saveGame();
+});
 </script>
 </body>
 </html>
