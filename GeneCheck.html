@@ -43,7 +43,6 @@
     overflow-y: auto;
   }
   .overlay.hidden { opacity:0; visibility:hidden; pointer-events:none; }
-  .overlay.top { z-index: 200; }
   .card {
     background: var(--bg2); border: 1px solid var(--border);
     border-radius: 16px; padding: 24px 20px;
@@ -108,13 +107,13 @@
     background:linear-gradient(135deg,#a01010,var(--red)); border:none; border-radius:10px;
     color:#fff; font-family:var(--font-d); font-size:15px; font-weight:700; letter-spacing:4px;
     text-transform:uppercase; cursor:pointer;
-    box-shadow:0 4px 24px rgba(224,32,32,.35),inset 0 1px 0 rgba(5,5,5,.1);
+    box-shadow:0 4px 24px rgba(224,32,32,.35),inset 0 1px 0 rgba(255,255,255,.1);
     transition:transform .1s,box-shadow .1s;
   }
   .btn-main:active { transform:scale(.96); }
   .btn-main.shop {
     background:linear-gradient(135deg,#7c4c00,var(--gold)); 
-    box-shadow:0 4px 24px rgba(245,180,0,.3),inset 0 1px 0 rgba(5,5,5,.1);
+    box-shadow:0 4px 24px rgba(245,180,0,.3),inset 0 1px 0 rgba(255,255,255,.1);
     color:#1a1000; font-size:14px;
   }
   .btn-ghost {
@@ -126,132 +125,6 @@
   }
   .btn-ghost:hover { border-color:var(--muted); color:var(--text); }
 
-  /* ── SETTINGS BUTTON (gear) ── */
-  .btn-settings {
-    width:220px; padding:11px 0;
-    background:transparent; border:1px solid var(--purple); border-radius:10px;
-    color:var(--purple); font-family:var(--font-d); font-size:13px;
-    font-weight:600; letter-spacing:3px; text-transform:uppercase; cursor:pointer;
-    transition:background .2s,color .2s;
-  }
-  .btn-settings:hover { background:rgba(139,92,246,.1); }
-
-  /* ── REDEEM (now inside settings, compact) ── */
-  .redeem-row {
-    display:flex; gap:8px; align-items:center; margin-bottom:6px;
-  }
-  .redeem-input-small {
-    flex:1; background:var(--bg3); border:1px solid var(--border);
-    border-radius:8px; padding:9px 10px; color:var(--blue);
-    font-family:var(--font-m); font-size:12px; letter-spacing:2px;
-    text-transform:uppercase; outline:none; transition:border-color .2s;
-    min-width:0;
-  }
-  .redeem-input-small::placeholder { color: rgba(59,130,246,.4); }
-  .redeem-input-small:focus { border-color:var(--blue); }
-  .btn-redeem-claim {
-    flex-shrink:0; padding:9px 14px; background:transparent; border:1px solid var(--blue);
-    border-radius:8px; color:var(--blue); font-family:var(--font-d); font-size:12px;
-    font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer;
-    transition:background .2s, transform .1s;
-  }
-  .btn-redeem-claim:active { transform:scale(.95); }
-  .btn-redeem-claim:hover { background:rgba(59,130,246,.1); }
-
-  .redeem-msg {
-    font-family:var(--font-m); font-size:11px; text-align:center;
-    margin-top:4px; margin-bottom:14px; min-height:16px; letter-spacing:1px;
-  }
-  .redeem-msg.success { color:var(--teal); }
-  .redeem-msg.error { color:var(--red); }
-
-  /* ── SETTINGS MODAL SECTIONS ── */
-  .settings-section { margin-bottom:16px; }
-  .settings-label {
-    font-family:var(--font-m); font-size:10px; color:var(--muted);
-    letter-spacing:2px; text-transform:uppercase; margin-bottom:8px;
-    display:flex; align-items:center; gap:6px;
-  }
-  .settings-divider { height:1px; background:var(--border); margin:16px 0; }
-
-  /* Toggle switch for ting sound */
-  .toggle-row {
-    display:flex; align-items:center; justify-content:space-between;
-    background:var(--bg3); border:1px solid var(--border); border-radius:10px;
-    padding:11px 14px;
-  }
-  .toggle-row-label { font-size:13px; font-weight:600; color:var(--text); }
-  .toggle-row-sub { font-size:10px; color:var(--muted); font-family:var(--font-m); margin-top:2px; }
-  .switch { position:relative; width:46px; height:26px; flex-shrink:0; }
-  .switch input { opacity:0; width:0; height:0; }
-  .switch-slider {
-    position:absolute; cursor:pointer; inset:0;
-    background:var(--bg); border:1px solid var(--border); border-radius:26px;
-    transition:.2s;
-  }
-  .switch-slider::before {
-    content:''; position:absolute; height:18px; width:18px; left:3px; bottom:3px;
-    background:var(--muted); border-radius:50%; transition:.2s;
-  }
-  .switch input:checked + .switch-slider { background:rgba(59,130,246,.2); border-color:var(--blue); }
-  .switch input:checked + .switch-slider::before { transform:translateX(20px); background:var(--blue); }
-
-  /* Volume slider */
-  .volume-row {
-    background:var(--bg3); border:1px solid var(--border); border-radius:10px;
-    padding:11px 14px; margin-top:8px;
-  }
-  .volume-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-  .volume-val { font-family:var(--font-m); font-size:11px; color:var(--blue); font-weight:700; }
-  input[type="range"] {
-    width:100%; -webkit-appearance:none; appearance:none;
-    height:5px; border-radius:4px; background:var(--bg); outline:none;
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance:none; appearance:none;
-    width:18px; height:18px; border-radius:50%;
-    background:var(--blue); cursor:pointer; border:2px solid var(--bg2);
-    box-shadow:0 0 8px rgba(59,130,246,.5);
-  }
-  input[type="range"]::-moz-range-thumb {
-    width:18px; height:18px; border-radius:50%;
-    background:var(--blue); cursor:pointer; border:2px solid var(--bg2);
-    box-shadow:0 0 8px rgba(59,130,246,.5);
-  }
-  input[type="range"]:disabled::-webkit-slider-thumb { background: var(--muted); box-shadow:none; }
-  input[type="range"]:disabled::-moz-range-thumb { background: var(--muted); box-shadow:none; }
-  input[type="range"]:disabled { opacity:.4; }
-
-  /* Reset data button */
-  .btn-danger {
-    width:100%; padding:12px 0; background:rgba(224,32,32,.08);
-    border:1px solid rgba(224,32,32,.35); border-radius:10px;
-    color:var(--red); font-family:var(--font-d); font-size:13px;
-    font-weight:700; letter-spacing:3px; text-transform:uppercase; cursor:pointer;
-    transition:background .2s, transform .1s;
-  }
-  .btn-danger:active { transform:scale(.97); }
-  .btn-danger:hover { background:rgba(224,32,32,.16); }
-
-  /* Confirm reset modal */
-  .confirm-icon {
-    width:50px; height:50px; border-radius:50%;
-    background:rgba(224,32,32,.1); border:1px solid rgba(224,32,32,.3);
-    display:flex; align-items:center; justify-content:center;
-    font-size:22px; margin:0 auto 12px;
-  }
-  .confirm-text { font-size:14px; color:var(--text); text-align:center; line-height:1.6; margin-bottom:6px; }
-  .confirm-sub { font-size:12px; color:var(--muted); text-align:center; line-height:1.6; margin-bottom:18px; font-family:var(--font-m); }
-  .confirm-btns { display:flex; gap:10px; }
-  .btn-confirm-no, .btn-confirm-yes {
-    flex:1; padding:12px 0; border-radius:10px; border:none; cursor:pointer;
-    font-family:var(--font-d); font-size:13px; font-weight:700; letter-spacing:3px;
-    text-transform:uppercase; transition:transform .1s, opacity .2s;
-  }
-  .btn-confirm-no:active, .btn-confirm-yes:active { transform:scale(.96); }
-  .btn-confirm-no { background:var(--bg3); border:1px solid var(--border); color:var(--text); }
-  .btn-confirm-yes { background:var(--red); color:#fff; }
-
   .btn-redeem {
     width:220px; padding:11px 0;
     background:transparent; border:1px solid var(--blue); border-radius:10px;
@@ -260,6 +133,28 @@
     transition:background .2s,color .2s;
   }
   .btn-redeem:hover { background:rgba(59,130,246,.1); }
+
+  .redeem-input {
+    width:100%; background:var(--bg3); border:1px solid var(--border);
+    border-radius:8px; padding:12px 14px; color:#fff;
+    font-family:var(--font-m); font-size:14px; letter-spacing:2px;
+    text-transform:uppercase; text-align:center; margin-bottom:12px;
+    outline:none; transition:border-color .2s;
+  }
+  .redeem-input:focus { border-color:var(--blue); }
+  .btn-redeem-submit {
+    width:100%; padding:12px 0; background:var(--blue); border:none;
+    border-radius:8px; color:#fff; font-family:var(--font-d); font-size:14px;
+    font-weight:700; letter-spacing:3px; text-transform:uppercase; cursor:pointer;
+    transition:transform .1s, opacity .2s;
+  }
+  .btn-redeem-submit:active { transform:scale(.97); }
+  .redeem-msg {
+    font-family:var(--font-m); font-size:11px; text-align:center;
+    margin-top:10px; min-height:16px; letter-spacing:1px;
+  }
+  .redeem-msg.success { color:var(--teal); }
+  .redeem-msg.error { color:var(--red); }
 
   .tester-row { display:flex; flex-direction:column; gap:6px; margin-top:14px; }
   .tester-label {
@@ -331,14 +226,7 @@
   .volt-bal-num { font-family:var(--font-m); font-size:14px; color:var(--gold); font-weight:700; }
   .volt-bal-label { font-size:10px; color:var(--muted); letter-spacing:1px; font-family:var(--font-m); }
 
-  .perk-cap-note {
-    font-family:var(--font-m); font-size:10px; color:var(--purple);
-    text-align:center; letter-spacing:1px; margin-bottom:12px;
-    background:rgba(139,92,246,.08); border:1px solid rgba(139,92,246,.);
-    border-radius:8px; padding:6px 10px;
-  }
-
-  .perk-list { display:flex; flex-direction:column; gap:8px; max-height:62vh; overflow-y:auto; padding-right:2px; }
+  .perk-list { display:flex; flex-direction:column; gap:8px; max-height:66vh; overflow-y:auto; padding-right:2px; }
   .perk-card {
     background:var(--bg3); border:1px solid var(--border);
     border-radius:12px; padding:12px 14px;
@@ -346,8 +234,7 @@
     transition:border-color .2s;
   }
   .perk-card.owned { border-color:rgba(0,201,138,.4); }
-  .perk-card.on-cd  { border-color:rgba(245,180,0,.); }
-  .perk-card.equipped { border-color:rgba(0,201,138,.6); box-shadow:0 0 0 1px rgba(0,201,138,.2) inset; }
+  .perk-card.on-cd  { border-color:rgba(245,180,0,.25); }
 
   .perk-top { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
   .perk-info { flex:1; }
@@ -365,14 +252,11 @@
     padding:6px 14px; border-radius:8px; border:none; cursor:pointer;
     font-family:var(--font-d); font-size:12px; font-weight:700; letter-spacing:2px;
     text-transform:uppercase; transition:transform .1s, opacity .2s;
-    white-space:nowrap;
   }
   .btn-buy:active { transform:scale(.94); }
   .btn-buy.can-buy { background:var(--gold); color:#1a1000; }
   .btn-buy.no-volt { background:var(--bg); color:var(--muted); border:1px solid var(--border); cursor:not-allowed; }
-  .btn-buy.bought  { background:rgba(0,201,138,.15); color:var(--teal); border:1px solid rgba(0,201,138,.3); cursor:pointer; }
-  .btn-buy.equipped { background:rgba(0,201,138,.9); color:#06231a; border:1px solid rgba(0,201,138,.9); cursor:pointer; }
-  .btn-buy.cap-full { background:var(--bg); color:var(--muted); border:1px solid var(--border); cursor:not-allowed; }
+  .btn-buy.bought  { background:rgba(0,201,138,.15); color:var(--teal); border:1px solid rgba(0,201,138,.3); cursor:default; }
 
   .perk-cd-bar-wrap { height:4px; background:var(--bg); border-radius:4px; overflow:hidden; }
   .perk-cd-bar { height:100%; border-radius:4px; background:var(--gold); transition:width .3s; }
@@ -396,7 +280,7 @@
   .topbar-right { display:flex; align-items:center; gap:8px; }
   .volt-hud {
     display:flex; align-items:center; gap:5px;
-    background:var(--bg2); border:1px solid rgba(245,180,0,.);
+    background:var(--bg2); border:1px solid rgba(245,180,0,.25);
     border-radius:7px; padding:4px 10px;
     font-family:var(--font-m); font-size:12px; color:var(--gold); font-weight:700;
   }
@@ -444,13 +328,13 @@
   }
   .prog-fill::after {
     content:''; position:absolute; top:0; right:0; width:28px; height:100%;
-    background:linear-gradient(90deg,transparent,rgba(5,5,5,.3));
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.3));
     border-radius:0 100px 100px 0;
   }
   .prog-label {
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     font-family:var(--font-m); font-size:11px; font-weight:700;
-    color:#ffff; letter-spacing:2px; text-shadow:0 1px 4px rgba(0,0,0,.8);
+    color:rgba(255,255,255,.9); letter-spacing:2px; text-shadow:0 1px 4px rgba(0,0,0,.8);
   }
 
   /* ── STATUS FEED ── */
@@ -474,7 +358,7 @@
   .needle {
     width:4px; height:40px;
     background:linear-gradient(180deg,#ff4444,#ff0000); border-radius:4px;
-    box-shadow:0 0 10px rgba(5,68,68,.8),0 0 4px rgba(5,0,0,1);
+    box-shadow:0 0 10px rgba(255,68,68,.8),0 0 4px rgba(255,0,0,1);
   }
   .ring-hub {
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
@@ -521,7 +405,7 @@
   <div class="menu-inner">
     <div class="dev-bubble-wrap">
       <div class="dev-bubble">
-        <p class="dev-bubble-text">Tombol setinggs ditambahkan! Fitur redeem dipindahkan disetinggs. Versi Beta 1.2.0</p>
+        <p class="dev-bubble-text">Update cuy, sekarang udah ada fitur redeem. Versi Beta 1.1.5</p>
         <div class="dev-bubble-tail"></div>
       </div>
       <div class="dev-avatar-row">
@@ -541,7 +425,7 @@
       <button class="btn-main" onclick="openDeviceModal()">▶ PLAY GAME</button>
       <button class="btn-main shop" onclick="showModal('shop-modal')">⚡ TOKO PERKS</button>
       <button class="btn-ghost" onclick="showModal('credit-modal')">CREDITS</button>
-      <button class="btn-settings" onclick="openSettingsModal()">⚙ SETTINGS</button>
+      <button class="btn-redeem" onclick="openRedeemModal()">🎁 REDEEM CODE</button>
     </div>
   </div>
 </div>
@@ -593,8 +477,7 @@
         <span class="volt-bal-label">VOLT</span>
       </div>
     </div>
-    <div class="modal-sub" style="margin-bottom:8px;">Beli skill untuk bantu latihan kamu</div>
-    <div class="perk-cap-note" id="perk-cap-note">Slot Perk Aktif: 0 / 3</div>
+    <div class="modal-sub" style="margin-bottom:12px;">Beli skill untuk bantu latihan kamu</div>
     <div class="perk-list" id="perk-list-container"></div>
     <div style="text-align:center;margin-top:14px;">
       <button class="btn-link" onclick="hideModal('shop-modal')">[ Tutup ]</button>
@@ -602,70 +485,16 @@
   </div>
 </div>
 
-<!-- ══ SETTINGS MODAL ══ -->
-<div id="settings-modal" class="overlay hidden">
+<!-- ══ REDEEM MODAL ══ -->
+<div id="redeem-modal" class="overlay hidden">
   <div class="card">
-    <div class="modal-title" style="color:var(--purple);">⚙ Settings</div>
-    <div class="modal-sub">Atur suara &amp; data permainan</div>
-
-    <!-- Sound settings -->
-    <div class="settings-section">
-      <div class="settings-label">🔊 Suara Peringatan Sebelum Skillcheck</div>
-      <div class="toggle-row">
-        <div>
-          <div class="toggle-row-label">Aktifkan Suara Peringatan</div>
-          <div class="toggle-row-sub">Bunyi peringatan sebelum skillcheck muncul</div>
-        </div>
-        <label class="switch">
-          <input type="checkbox" id="ting-toggle" onchange="onTingToggle()">
-          <span class="switch-slider"></span>
-        </label>
-      </div>
-      <div class="volume-row">
-        <div class="volume-top">
-          <span class="toggle-row-label" style="font-size:11px;">Volume Peringatan</span>
-          <span class="volume-val" id="ting-vol-val">50%</span>
-        </div>
-        <input type="range" id="ting-volume" min="0" max="100" value="50" oninput="onTingVolume()">
-      </div>
-    </div>
-
-    <div class="settings-divider"></div>
-
-    <!-- Redeem code -->
-    <div class="settings-section">
-      <div class="settings-label">🎁 Redeem Code</div>
-      <div class="redeem-row">
-        <input type="text" id="redeem-input" class="redeem-input-small" placeholder="MASUKKAN KODE" maxlength="30">
-        <button class="btn-redeem-claim" onclick="submitRedeem()">Klaim</button>
-      </div>
-      <div id="redeem-msg" class="redeem-msg"></div>
-    </div>
-
-    <div class="settings-divider"></div>
-
-    <!-- Reset data -->
-    <div class="settings-section" style="margin-bottom:6px;">
-      <div class="settings-label">⚠ Zona Bahaya</div>
-      <button class="btn-danger" onclick="openConfirmReset()">Hapus Data</button>
-    </div>
-
-    <div style="text-align:center;margin-top:10px;">
-      <button class="btn-link" onclick="hideModal('settings-modal')">[ Tutup ]</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ CONFIRM RESET MODAL ══ -->
-<div id="confirm-reset-modal" class="overlay hidden top">
-  <div class="card">
-    <div class="confirm-icon">⚠️</div>
-    <div class="modal-title" style="font-size:16px;color:var(--red);">Apakah Kamu Yakin?</div>
-    <div class="confirm-text">Jika kamu memilih <b>Iya</b>, semua progress di dalam game akan direset seperti semula!</div>
-    <div class="confirm-sub">Volt akan kembali ke 500⚡, semua perk yang dimiliki akan hilang, dan kode redeem yang sudah dipakai akan bisa dipakai lagi.</div>
-    <div class="confirm-btns">
-      <button class="btn-confirm-no" onclick="hideModal('confirm-reset-modal')">Tidak</button>
-      <button class="btn-confirm-yes" onclick="confirmResetData()">Iya</button>
+    <div class="modal-title" style="color:var(--blue);">🎁 Redeem Code</div>
+    <div class="modal-sub">Masukkan kode untuk klaim Volt</div>
+    <input type="text" id="redeem-input" class="redeem-input" placeholder="MASUKKAN KODE" maxlength="30">
+    <button class="btn-redeem-submit" onclick="submitRedeem()">Klaim Sekarang</button>
+    <div id="redeem-msg" class="redeem-msg"></div>
+    <div style="text-align:center;margin-top:14px;">
+      <button class="btn-link" onclick="hideModal('redeem-modal')">[ Tutup ]</button>
     </div>
   </div>
 </div>
@@ -764,8 +593,7 @@ const $ = id => document.getElementById(id);
 // ── DOM ──
 const menuOverlay = $('menu-overlay'), deviceModal = $('device-modal'),
       modeModal   = $('mode-modal'),   shopModal   = $('shop-modal'),
-      settingsModal = $('settings-modal'), confirmResetModal = $('confirm-reset-modal'),
-      creditModal = $('credit-modal'),
+      redeemModal = $('redeem-modal'), creditModal = $('credit-modal'),
       modeBadge   = $('mode-badge'),
       progFill    = $('prog-fill'),    progText    = $('prog-text'),
       ringOuter   = $('ring-outer'),   needleAxis  = $('needle-axis'),
@@ -783,15 +611,13 @@ let device = 'computer', gameMode = 'normal';
 
 // ══════════════════ PERSISTENCE (Save/Load) ══════════════════
 const SAVE_KEY = 'genecheck_save_v1';
-const MAX_ACTIVE_PERKS = 3;
 
 // ── REDEEM CODES: tambah/edit kode di sini ──
 // Format: 'KODE': jumlahVolt
 const REDEEM_CODES = {
-  'NEWVERSION!': 100,
+  'UPDATEGENECHECK!': 15,
   'GENECHECK10': 10,
   'YAHOO': 1,
-  'W-UPDATE': 150,
 };
 
 function loadSave() {
@@ -806,10 +632,8 @@ function saveGame() {
   try {
     const data = {
       volts: volts,
-      perks: PERKS.map(p => ({ id: p.id, owned: p.owned, equipped: p.equipped, cdLeft: p.cdLeft })),
-      redeemed: redeemedCodes,
-      tingEnabled: tingEnabled,
-      tingVolume: tingVolume
+      perks: PERKS.map(p => ({ id: p.id, owned: p.owned, cdLeft: p.cdLeft })),
+      redeemed: redeemedCodes
     };
     localStorage.setItem(SAVE_KEY, JSON.stringify(data));
   } catch(e) {}
@@ -818,10 +642,6 @@ function saveGame() {
 // ── ECONOMY (persisted) ──
 let volts = 500; // default starting volt for new players
 let redeemedCodes = [];
-
-// ── SETTINGS (persisted) ──
-let tingEnabled = true;
-let tingVolume = 50; // 0-100
 
 // ── PERKS DEFINITION ──
 const PERKS = [
@@ -832,7 +652,7 @@ const PERKS = [
     desc: 'Menampilkan bayangan biru posisi target zona 1 detik sebelum jarum bergerak. Cooldown: aktif tiap 4× skillcheck.',
     price: 4500,
     cdMax: 4,
-    owned: false, equipped: false, cdLeft: 0, useCount: 0
+    owned: false, cdLeft: 0, useCount: 0
   },
   {
     id: 'technician',
@@ -841,7 +661,7 @@ const PERKS = [
     desc: 'Saat gagal, penalti ledakan dipotong 50% (hanya -4%). Ada peluang kecil penalti jadi 0%. Cooldown: 10× skillcheck.',
     price: 2500,
     cdMax: 10,
-    owned: false, equipped: false, cdLeft: 0, useCount: 0
+    owned: false, cdLeft: 0, useCount: 0
   },
   {
     id: 'hyperfocus',
@@ -850,7 +670,7 @@ const PERKS = [
     desc: 'Tiap Great Hit → kecepatan pengisian naik 60% selama 5 detik. Cooldown: 7× skillcheck.',
     price: 3500,
     cdMax: 7,
-    owned: false, equipped: false, cdLeft: 0, useCount: 0
+    owned: false, cdLeft: 0, useCount: 0
   },
   {
     id: 'steady-hand',
@@ -859,39 +679,31 @@ const PERKS = [
     desc: 'Memperlebar Good Zone sebesar +30%. Passif — tidak ada cooldown.',
     price: 25000,
     cdMax: 0,
-    owned: false, equipped: false, cdLeft: 0, useCount: 0
+    owned: false, cdLeft: 0, useCount: 0
   }
 ];
 
 // ── APPLY SAVE DATA ──
-function applySave() {
+(function applySave() {
   const saved = loadSave();
   if (saved) {
     if (typeof saved.volts === 'number') volts = saved.volts;
     if (Array.isArray(saved.perks)) {
       saved.perks.forEach(sp => {
         const p = PERKS.find(x => x.id === sp.id);
-        if (p) {
-          p.owned = !!sp.owned;
-          p.equipped = !!sp.equipped;
-          p.cdLeft = sp.cdLeft || 0;
-        }
+        if (p) { p.owned = !!sp.owned; p.cdLeft = sp.cdLeft || 0; }
       });
     }
     if (Array.isArray(saved.redeemed)) redeemedCodes = saved.redeemed;
-    if (typeof saved.tingEnabled === 'boolean') tingEnabled = saved.tingEnabled;
-    if (typeof saved.tingVolume === 'number') tingVolume = saved.tingVolume;
   } else {
     // first time ever — save initial state immediately
     saveGame();
   }
-}
-applySave();
+})();
 
 function perk(id) { return PERKS.find(p => p.id === id); }
-function perkOwned(id) { return perk(id).owned && perk(id).equipped; }
-function perkReady(id) { const p = perk(id); return p.owned && p.equipped && p.cdLeft === 0; }
-function equippedCount() { return PERKS.filter(p => p.owned && p.equipped).length; }
+function perkOwned(id) { return perk(id).owned; }
+function perkReady(id) { const p = perk(id); return p.owned && p.cdLeft === 0; }
 
 // ── STATE ──
 let progress = 0, isRepairing = false;
@@ -906,16 +718,14 @@ let stats = { streak:0, great:0, fail:0 };
 
 // ── AUDIO ──
 function ting() {
-  if (!tingEnabled) return;
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
     const osc = ctx.createOscillator(), g = ctx.createGain();
-    const vol = Math.max(0, Math.min(1, tingVolume / 100)) * 0.18;
     osc.type = 'sine';
     osc.frequency.setValueAtTime(700, ctx.currentTime);
     osc.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + .12);
-    g.gain.setValueAtTime(vol, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + .18);
+    g.gain.setValueAtTime(0.18, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + .18);
     osc.connect(g); g.connect(ctx.destination);
     osc.start(); osc.stop(ctx.currentTime + .2);
   } catch(e){}
@@ -944,32 +754,13 @@ function hideModal(id) { $(id).classList.add('hidden'); }
 function openDeviceModal() { hideModal('menu-overlay'); showModal('device-modal'); }
 function selectDevice(d) { device = d; hideModal('device-modal'); showModal('mode-modal'); }
 
-// ── SETTINGS MODAL ──
-function openSettingsModal() {
-  $('ting-toggle').checked = tingEnabled;
-  $('ting-volume').value = tingVolume;
-  $('ting-volume').disabled = !tingEnabled;
-  $('ting-vol-val').innerText = tingVolume + '%';
+function openRedeemModal() {
   $('redeem-input').value = '';
   $('redeem-msg').innerText = '';
   $('redeem-msg').className = 'redeem-msg';
-  showModal('settings-modal');
+  showModal('redeem-modal');
 }
 
-function onTingToggle() {
-  tingEnabled = $('ting-toggle').checked;
-  $('ting-volume').disabled = !tingEnabled;
-  if (tingEnabled) ting(); // preview sound
-  saveGame();
-}
-
-function onTingVolume() {
-  tingVolume = parseInt($('ting-volume').value, 10);
-  $('ting-vol-val').innerText = tingVolume + '%';
-  saveGame();
-}
-
-// ── REDEEM ──
 function submitRedeem() {
   const input = $('redeem-input');
   const msg = $('redeem-msg');
@@ -1003,48 +794,6 @@ function submitRedeem() {
   input.value = '';
 }
 
-// ── RESET DATA ──
-function openConfirmReset() {
-  confirmResetModal.classList.remove('hidden');
-}
-
-function confirmResetData() {
-  // Reset economy
-  volts = 500;
-  redeemedCodes = [];
-  // Reset perks
-  PERKS.forEach(p => { p.owned = false; p.equipped = false; p.cdLeft = 0; });
-  // Reset settings to default
-  tingEnabled = true;
-  tingVolume = 50;
-  // Reset in-game stats / progress
-  fullStop();
-  progress = 0;
-  stats = { streak:0, great:0, fail:0 };
-  spamming = false; spamCount = 0; lastZoneStart = -1; hyperfocusActive = false;
-
-  saveGame();
-
-  // Refresh UI
-  updateVoltUI();
-  updateProgress();
-  updateStats();
-  renderPerkPills();
-  if (!shopModal.classList.contains('hidden')) renderShop();
-
-  // Refresh settings UI
-  $('ting-toggle').checked = tingEnabled;
-  $('ting-volume').value = tingVolume;
-  $('ting-volume').disabled = false;
-  $('ting-vol-val').innerText = tingVolume + '%';
-  $('redeem-input').value = '';
-  $('redeem-msg').innerText = '';
-  $('redeem-msg').className = 'redeem-msg';
-
-  hideModal('confirm-reset-modal');
-  feedMsg('Data Direset!', '#e02020', 'scale(1)');
-}
-
 function startGame(mode) {
   gameMode = mode;
   hideModal('mode-modal');
@@ -1074,36 +823,24 @@ function backToMenu() { fullStop(); saveGame(); showModal('menu-overlay'); }
 // ── SHOP ──
 function renderShop() {
   shopVoltDisp.innerText = volts;
-  const used = equippedCount();
-  $('perk-cap-note').innerText = `Slot Perk Aktif: ${used} / ${MAX_ACTIVE_PERKS}`;
   const container = $('perk-list-container');
   container.innerHTML = '';
   PERKS.forEach(p => {
-    const ready = p.owned && p.equipped && p.cdLeft === 0;
-    const onCD  = p.owned && p.equipped && p.cdLeft > 0;
+    const ready = p.owned && p.cdLeft === 0;
+    const onCD  = p.owned && p.cdLeft > 0;
     const cdPct = p.cdMax > 0 ? ((p.cdMax - p.cdLeft) / p.cdMax) * 100 : 100;
 
-    let btnClass, btnText, cardClass = '';
-    if (!p.owned) {
-      if (volts >= p.price) { btnClass = 'can-buy'; btnText = '⚡ ' + p.price; }
-      else { btnClass = 'no-volt'; btnText = '⚡ ' + p.price; }
-    } else if (p.equipped) {
-      btnClass = 'equipped'; btnText = '✓ Digunakan';
-      cardClass = onCD ? 'on-cd equipped' : 'equipped';
-    } else {
-      // owned but not equipped
-      if (used >= MAX_ACTIVE_PERKS) { btnClass = 'cap-full'; btnText = 'Slot Penuh'; }
-      else { btnClass = 'bought'; btnText = '✓ Dimiliki'; }
-      cardClass = 'owned';
-    }
+    let btnClass = 'no-volt', btnText = '⚡ ' + p.price;
+    if (p.owned) { btnClass = 'bought'; btnText = '✓ Dimiliki'; }
+    else if (volts >= p.price) { btnClass = 'can-buy'; btnText = '⚡ ' + p.price; }
 
-    const cdBar = (p.owned && p.equipped && p.cdMax > 0) ? `
+    const cdBar = p.owned && p.cdMax > 0 ? `
       <div class="perk-cd-bar-wrap"><div class="perk-cd-bar" style="width:${cdPct}%"></div></div>
       <div class="perk-cd-text">${ready ? '✓ SIAP' : `CD: ${p.cdLeft}× check tersisa`}</div>
-    ` : (p.owned && p.equipped ? '<div class="perk-cd-text" style="color:var(--teal)">✓ Passif Aktif</div>' : '');
+    ` : (p.owned ? '<div class="perk-cd-text" style="color:var(--teal)">✓ Passif Aktif</div>' : '');
 
     container.innerHTML += `
-      <div class="perk-card ${cardClass}">
+      <div class="perk-card ${p.owned ? (onCD ? 'on-cd' : 'owned') : ''}">
         <div class="perk-top">
           <div class="perk-info">
             <div class="perk-name">${p.name} <span>${p.sub}</span></div>
@@ -1111,35 +848,12 @@ function renderShop() {
           </div>
           <div class="perk-right">
             <div class="perk-price">⚡${p.price}</div>
-            <button class="btn-buy ${btnClass}" onclick="onPerkClick('${p.id}')" ${(!p.owned && volts < p.price) ? 'disabled' : ''}>${btnText}</button>
+            <button class="btn-buy ${btnClass}" onclick="buyPerk('${p.id}')" ${p.owned ? 'disabled' : ''}>${btnText}</button>
           </div>
         </div>
         ${cdBar}
       </div>`;
   });
-}
-
-function onPerkClick(id) {
-  const p = perk(id);
-  if (!p.owned) {
-    buyPerk(id);
-    return;
-  }
-  // Already owned — toggle equip
-  if (p.equipped) {
-    p.equipped = false;
-  } else {
-    if (equippedCount() >= MAX_ACTIVE_PERKS) {
-      feedMsg(`Maks ${MAX_ACTIVE_PERKS} Perk Aktif!`, '#8b5cf6', 'scale(1)');
-      renderShop();
-      return;
-    }
-    p.equipped = true;
-    p.cdLeft = 0;
-  }
-  renderShop();
-  renderPerkPills();
-  saveGame();
 }
 
 function buyPerk(id) {
@@ -1148,12 +862,6 @@ function buyPerk(id) {
   volts -= p.price;
   p.owned = true;
   p.cdLeft = 0;
-  // Auto-equip if there's a free slot
-  if (equippedCount() < MAX_ACTIVE_PERKS) {
-    p.equipped = true;
-  } else {
-    p.equipped = false;
-  }
   updateVoltUI();
   renderShop();
   renderPerkPills();
@@ -1176,7 +884,7 @@ function renderPerkPills() {
   const row = $('perk-pills');
   row.innerHTML = '';
   PERKS.forEach(p => {
-    if (!p.owned || !p.equipped) return;
+    if (!p.owned) return;
     const ready  = p.cdLeft === 0;
     const cls    = p.cdMax === 0 ? 'active' : (ready ? 'active' : 'cooldown');
     const label  = p.cdMax === 0 ? p.name : (ready ? p.name : `${p.name} CD:${p.cdLeft}`);
@@ -1188,7 +896,7 @@ function renderPerkPills() {
 function tickPerkCooldowns() {
   totalSCCount++;
   PERKS.forEach(p => {
-    if (!p.owned || !p.equipped || p.cdMax === 0) return;
+    if (!p.owned || p.cdMax === 0) return;
     if (p.cdLeft > 0) p.cdLeft--;
   });
   renderPerkPills();
@@ -1348,7 +1056,7 @@ function triggerHit() {
     if (inGreat) {
       stats.great++; stats.streak++;
       progress = Math.min(100, progress + 3);
-      earnVolts(8);
+      earnVolts(15);
       if (perkReady('hyperfocus')) {
         activateHyperfocus();
         perk('hyperfocus').cdLeft = perk('hyperfocus').cdMax;
@@ -1356,7 +1064,7 @@ function triggerHit() {
       feedMsg('⚡ Great Skill Check!', '#00c98a', 'scale(1.1)');
     } else if (inGood) {
       stats.streak++;
-      earnVolts(3);
+      earnVolts(5);
       feedMsg('Good Check', '#d4d4e8', 'scale(1)');
     } else {
       failSC('Meleset!'); return;
@@ -1383,8 +1091,8 @@ function afterHit() {
     spamming = false;
     progress = Math.min(100, progress + 10);
     updateProgress();
-    earnVolts(50);
-    feedMsg('⚡ Panic Cleared! +50⚡', '#f5b400', 'scale(1.05)');
+    earnVolts(150);
+    feedMsg('⚡ Panic Cleared! +150⚡', '#f5b400', 'scale(1.05)');
   }
 }
 
@@ -1427,8 +1135,8 @@ function handleComplete() {
   btnRepair.classList.remove('repairing');
   btnRepairTxt.innerText = 'RESET GAME';
   centerLabel.innerText = 'DONE'; centerSub.innerText = '100%';
-  earnVolts();
-  feedMsg('✓ Generator Selesai! +⚡', '#f5b400', 'scale(1.1)');
+  earnVolts(50);
+  feedMsg('✓ Generator Selesai! +50⚡', '#f5b400', 'scale(1.1)');
 }
 
 // ── RESET ──
@@ -1486,8 +1194,7 @@ window.addEventListener('keydown', e => {
   if (!deviceModal.classList.contains('hidden')) return;
   if (!modeModal.classList.contains('hidden')) return;
   if (!shopModal.classList.contains('hidden')) return;
-  if (!settingsModal.classList.contains('hidden')) return;
-  if (!confirmResetModal.classList.contains('hidden')) return;
+  if (!redeemModal.classList.contains('hidden')) return;
   if (e.key.toLowerCase() === 'r') { e.preventDefault(); toggleRepair(); }
   if (e.code === 'Space' || e.key === ' ') { e.preventDefault(); triggerHit(); }
 });
