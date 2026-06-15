@@ -108,13 +108,13 @@
     background:linear-gradient(135deg,#a01010,var(--red)); border:none; border-radius:10px;
     color:#fff; font-family:var(--font-d); font-size:15px; font-weight:700; letter-spacing:4px;
     text-transform:uppercase; cursor:pointer;
-    box-shadow:0 4px 24px rgba(224,32,32,.35),inset 0 1px 0 rgba(5,5,5,.1);
+    box-shadow:0 4px 24px rgba(224,32,32,.35),inset 0 1px 0 rgba(255,255,255,.1);
     transition:transform .1s,box-shadow .1s;
   }
   .btn-main:active { transform:scale(.96); }
   .btn-main.shop {
     background:linear-gradient(135deg,#7c4c00,var(--gold)); 
-    box-shadow:0 4px 24px rgba(245,180,0,.3),inset 0 1px 0 rgba(5,5,5,.1);
+    box-shadow:0 4px 24px rgba(245,180,0,.3),inset 0 1px 0 rgba(255,255,255,.1);
     color:#1a1000; font-size:14px;
   }
   .btn-ghost {
@@ -261,6 +261,21 @@
   }
   .btn-redeem:hover { background:rgba(59,130,246,.1); }
 
+  /* ── GACHA (locked / coming soon) ── */
+  .btn-gacha {
+    width:220px; padding:11px 0;
+    background:transparent; border:1px solid var(--border); border-radius:10px;
+    color:var(--muted); font-family:var(--font-d); font-size:13px;
+    font-weight:600; letter-spacing:3px; text-transform:uppercase;
+    cursor:not-allowed; position:relative; overflow:hidden;
+    opacity:.65;
+  }
+  .btn-gacha .gacha-lock { margin-right:6px; }
+  .btn-gacha .gacha-soon {
+    display:block; font-size:8px; letter-spacing:2px; color:var(--muted);
+    font-family:var(--font-m); margin-top:3px; text-transform:uppercase;
+  }
+
   .tester-row { display:flex; flex-direction:column; gap:6px; margin-top:14px; }
   .tester-label {
     font-family:var(--font-m); font-size:9px; color:var(--muted);
@@ -334,7 +349,7 @@
   .perk-cap-note {
     font-family:var(--font-m); font-size:10px; color:var(--purple);
     text-align:center; letter-spacing:1px; margin-bottom:12px;
-    background:rgba(139,92,246,.08); border:1px solid rgba(139,92,246,.);
+    background:rgba(139,92,246,.08); border:1px solid rgba(139,92,246,.25);
     border-radius:8px; padding:6px 10px;
   }
 
@@ -346,7 +361,7 @@
     transition:border-color .2s;
   }
   .perk-card.owned { border-color:rgba(0,201,138,.4); }
-  .perk-card.on-cd  { border-color:rgba(245,180,0,.); }
+  .perk-card.on-cd  { border-color:rgba(245,180,0,.25); }
   .perk-card.equipped { border-color:rgba(0,201,138,.6); box-shadow:0 0 0 1px rgba(0,201,138,.2) inset; }
 
   .perk-top { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
@@ -396,7 +411,7 @@
   .topbar-right { display:flex; align-items:center; gap:8px; }
   .volt-hud {
     display:flex; align-items:center; gap:5px;
-    background:var(--bg2); border:1px solid rgba(245,180,0,.);
+    background:var(--bg2); border:1px solid rgba(245,180,0,.25);
     border-radius:7px; padding:4px 10px;
     font-family:var(--font-m); font-size:12px; color:var(--gold); font-weight:700;
   }
@@ -444,13 +459,13 @@
   }
   .prog-fill::after {
     content:''; position:absolute; top:0; right:0; width:28px; height:100%;
-    background:linear-gradient(90deg,transparent,rgba(5,5,5,.3));
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.3));
     border-radius:0 100px 100px 0;
   }
   .prog-label {
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     font-family:var(--font-m); font-size:11px; font-weight:700;
-    color:#ffff; letter-spacing:2px; text-shadow:0 1px 4px rgba(0,0,0,.8);
+    color:rgba(255,255,255,.9); letter-spacing:2px; text-shadow:0 1px 4px rgba(0,0,0,.8);
   }
 
   /* ── STATUS FEED ── */
@@ -474,7 +489,7 @@
   .needle {
     width:4px; height:40px;
     background:linear-gradient(180deg,#ff4444,#ff0000); border-radius:4px;
-    box-shadow:0 0 10px rgba(5,68,68,.8),0 0 4px rgba(5,0,0,1);
+    box-shadow:0 0 10px rgba(255,68,68,.8),0 0 4px rgba(255,0,0,1);
   }
   .ring-hub {
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
@@ -542,6 +557,7 @@
       <button class="btn-main shop" onclick="showModal('shop-modal')">⚡ TOKO PERKS</button>
       <button class="btn-ghost" onclick="showModal('credit-modal')">CREDITS</button>
       <button class="btn-settings" onclick="openSettingsModal()">⚙ SETTINGS</button>
+      <button class="btn-gacha" disabled title="Coming Soon"><span class="gacha-lock">🔒</span>GACHA<span class="gacha-soon">Coming Soon</span></button>
     </div>
   </div>
 </div>
@@ -867,7 +883,7 @@ const PERKS = [
 function applySave() {
   const saved = loadSave();
   if (saved) {
-    if (typeof saved.volts === 'number') volts = saved.volts;
+    if (typeof saved.volts === 'number' && !isNaN(saved.volts)) volts = saved.volts;
     if (Array.isArray(saved.perks)) {
       saved.perks.forEach(sp => {
         const p = PERKS.find(x => x.id === sp.id);
@@ -880,7 +896,7 @@ function applySave() {
     }
     if (Array.isArray(saved.redeemed)) redeemedCodes = saved.redeemed;
     if (typeof saved.tingEnabled === 'boolean') tingEnabled = saved.tingEnabled;
-    if (typeof saved.tingVolume === 'number') tingVolume = saved.tingVolume;
+    if (typeof saved.tingVolume === 'number' && !isNaN(saved.tingVolume)) tingVolume = saved.tingVolume;
   } else {
     // first time ever — save initial state immediately
     saveGame();
@@ -1166,7 +1182,9 @@ function updateVoltUI() {
 }
 
 function earnVolts(amount) {
+  if (typeof amount !== 'number' || isNaN(amount)) amount = 0;
   volts += amount;
+  if (isNaN(volts)) volts = 500;
   updateVoltUI();
   saveGame();
 }
@@ -1383,8 +1401,8 @@ function afterHit() {
     spamming = false;
     progress = Math.min(100, progress + 10);
     updateProgress();
-    earnVolts(50);
-    feedMsg('⚡ Panic Cleared! +50⚡', '#f5b400', 'scale(1.05)');
+    earnVolts(20);
+    feedMsg('⚡ Panic Cleared! +20⚡', '#f5b400', 'scale(1.05)');
   }
 }
 
@@ -1427,8 +1445,9 @@ function handleComplete() {
   btnRepair.classList.remove('repairing');
   btnRepairTxt.innerText = 'RESET GAME';
   centerLabel.innerText = 'DONE'; centerSub.innerText = '100%';
-  earnVolts();
-  feedMsg('✓ Generator Selesai! +⚡', '#f5b400', 'scale(1.1)');
+  const reward = gameMode === 'overload-panic' ? 50 : 25;
+  earnVolts(reward);
+  feedMsg(`✓ Generator Selesai! +${reward}⚡`, '#f5b400', 'scale(1.1)');
 }
 
 // ── RESET ──
